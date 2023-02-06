@@ -1,0 +1,36 @@
+<h1>Listing Restaurants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Restaurant Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Password</th>
+      <th>Tag</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for restaurant <- @restaurants do %>
+    <tr>
+      <td><%= restaurant.username %></td>
+      <td><%= restaurant.rname %></td>
+      <td><%= restaurant.email %></td>
+      <td><%= restaurant.address %></td>
+      <td><%= restaurant.password %></td>
+      <td><%= restaurant.tag %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.restaurant_path(@conn, :show, restaurant) %></span>
+        <span><%= link "Edit", to: Routes.restaurant_path(@conn, :edit, restaurant) %></span>
+        <span><%= link "Delete", to: Routes.restaurant_path(@conn, :delete, restaurant), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Restaurant", to: Routes.restaurant_path(@conn, :new) %></span>

@@ -1,0 +1,20 @@
+<style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      background-color: #e4e9ed;
+      padding: 10px;
+    }
+    .grid-item {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+    }
+    </style>
+    <div class="grid-container">
+    <span><%= link "1. Add items", to: Routes.item_path(@conn, :index) %><br></span>
+    <span><%= link "2. Update Restaurant Open Hours", to: Routes.restaurant_path(@conn, :new) %><br></span>
+  </div>
+

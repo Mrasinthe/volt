@@ -1,0 +1,65 @@
+# This file is a template, and might need editing before it works on your project.
+# You can copy and paste this template into a new `.gitlab-ci.yml` file.
+# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
+#
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Elixir.gitlab-ci.yml
+stages:
+  - build
+  - test
+
+compile:
+  stage: build
+  image: elixir:1.12
+  # use cache to speed up subsequent builds
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - _build
+      - deps
+  script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - cd volt
+    - mix deps.get
+    - mix compile
+
+test:
+  stage: test
+  image: elixir:1.12
+
+  # Pick zero or more services to be used on all builds.
+  # Only needed when using a docker container to run your tests in.
+  # Check out: http://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
+  services:
+    - postgres:13-alpine
+
+  variables:
+    POSTGRES_DB: volt_test
+    POSTGRES_HOST: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: "postgres"
+    MIX_ENV: "ci"
+
+
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - _build
+      - deps
+  
+
+  before_script:
+    - apt-get update && apt-get -y install postgresql-client
+    - cd volt
+    - mix local.rebar --force
+    - mix local.hex --force
+    - mix deps.get
+    - mix ecto.create
+    - mix ecto.migrate
+
+  script:
+    - mix test
+    - MIX_ENV=ci mix coveralls.xml -o "test-results"

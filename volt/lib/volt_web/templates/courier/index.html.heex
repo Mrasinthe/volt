@@ -1,0 +1,37 @@
+<h1>Listing Couriers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Courier ID</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Username</th>
+      <th>Date of birth</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for courier <- @couriers do %>
+    <tr>
+      <td><%= courier.id %></td>
+      <td><%= courier.name %></td>
+      <td><%= courier.surname %></td>
+      <td><%= courier.username %></td>
+      <td><%= courier.date_of_birth %></td>
+      <td><%= courier.email %></td>
+      <td><%= courier.password %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.courier_path(@conn, :show, courier) %></span>
+        <span><%= link "Edit", to: Routes.courier_path(@conn, :edit, courier) %></span>
+        <span><%= link "Delete", to: Routes.courier_path(@conn, :delete, courier), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Courier", to: Routes.courier_path(@conn, :new) %></span>

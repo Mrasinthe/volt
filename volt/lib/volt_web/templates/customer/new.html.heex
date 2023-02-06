@@ -1,0 +1,5 @@
+<h1>Register as New Customer</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.customer_path(@conn, :create)) %>
+
+<span><%= link "Back to Login", to: Routes.page_path(@conn, :index) %></span>

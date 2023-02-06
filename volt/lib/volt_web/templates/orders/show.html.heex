@@ -1,0 +1,13 @@
+<h1>Show Orders</h1>
+
+<ul>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @orders.quantity %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.orders_path(@conn, :edit, @orders) %></span> |
+<span><%= link "Back", to: Routes.orders_path(@conn, :index) %></span>

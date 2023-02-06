@@ -1,0 +1,30 @@
+<h2>MENU</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+     <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for menu <- @orderitem do %>
+    <tr>
+      <td><%= menu.id %></td>
+      <td><%= menu.name%></td>
+      <td><%= menu.description %></td>
+      <td ><%= menu.status %></td>
+      <td> 10</td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+ <div>
+    <%= link "Place Order", to: Routes.orders_path(@conn, :create)%>
+  </div>
+
+<span><%= link "Back", to: Routes.customermain_path(@conn, :index)%><br></span>

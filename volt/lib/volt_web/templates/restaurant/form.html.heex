@@ -1,0 +1,35 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :username %>
+  <%= text_input f, :username %>
+  <%= error_tag f, :username %>
+
+  <%= label f, :Name_of_your_Restaurant %>
+  <%= text_input f, :rname %>
+  <%= error_tag f, :rname %>
+
+  <%= label f, :email %>
+  <%= text_input f, :email %>
+  <%= error_tag f, :email %>
+
+  <%= label f, :address %>
+  <%= text_input f, :address %>
+  <%= error_tag f, :address %>
+
+  <%= label f, :password %>
+  <%= text_input f, :password %>
+  <%= error_tag f, :password %>
+
+  <%= label f, :what_type_of_food_do_you_sell? %>
+  <%= select f, :tag, ["---": NULL, "Fastfood": "fastfood", "Italian": "italian", "Asian": "asian", "Mexican": "mexican", "Others": "others"] %>
+  <%= error_tag f, :tag %>
+
+  <div>
+    <%= submit "Register" %>
+  </div>
+</.form>

@@ -1,0 +1,43 @@
+<h1>Show Courier</h1>
+
+<ul>
+
+  <li>
+    <strong>Courier ID:</strong>
+    <%= @courier.id %>
+  </li>
+
+    <li>
+    <strong>Name:</strong>
+    <%= @courier.name %>
+  </li>
+
+    <li>
+    <strong>Surname:</strong>
+    <%= @courier.surname %>
+  </li>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @courier.username %>
+  </li>
+
+  <li>
+    <strong>Date of birth:</strong>
+    <%= @courier.date_of_birth %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @courier.email %>
+  </li>
+
+  <li>
+    <strong>Password:</strong>
+    <%= @courier.password %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.courier_path(@conn, :edit, @courier) %></span> |
+<span><%= link "Back", to: Routes.courier_path(@conn, :index) %></span>

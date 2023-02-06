@@ -1,0 +1,46 @@
+<style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      background-color: #e4e9ed;
+      padding: 10px;
+    }
+    .grid-item {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, , 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+    }
+    </style>
+
+
+    <div class="grid-container">
+    <span><%= link "Search", to: Routes.restaurant_path(@conn, :new) %><br></span>
+    </div>
+    <br>
+
+<div class="grid-container2">
+<h2>Restaurants</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th hidden>Restaurant ID</th>
+      <th>Restaurant Name</th>
+      <th>Tag</th>
+      <th hidden>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for restaurant <- @restaurants do %>
+    <tr>
+      <td hidden><%= restaurant.id %></td>
+      <td><%= restaurant.rname %></td>
+      <td><%= restaurant.tag %></td>
+      <td><%= link "Menu", to: Routes.orders_path(@conn, :index)%></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+  </div>

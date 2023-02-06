@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content={csrf_token_value()}>
+    <%= live_title_tag assigns[:page_title] || "Volt", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+  </head>
+  <body>
+    <header>
+      <section class="container">
+        <a href="http://localhost:4000/" class="phx-logo">
+          <img src={Routes.static_path(@conn, "/images/volt.png")} alt="VOLT Logo" style="width:100px;height:50px;"/>
+        </a>
+      </section>
+      <ol class="breadcrumb pull-right">
+        <%= if @conn.assigns.current_user do %>
+                  <li>Hello <%= @conn.assigns.current_user.rname %></li>
+                  <li><%= link "Log out", to: Routes.rsession_path(@conn, :delete, @conn.assigns.current_user), method: "delete" %></li>
+        <%= else  %>
+
+        <% end %>
+                </ol>
+    </header>
+    <%= @inner_content %>
+    <!--
+    <style>
+      .footer {
+        max-height: 30;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(94, 94, 94);
+        color: white;
+        text-align: center;
+      }
+    </style>
+    <div class="footer">
+      <footer class="page-footer blue">
+        <ul>
+          <h3><b>Important stuff</b></h3>
+          <li>Impressum</li>
+          <li>Contact</li>
+        </ul>
+      </footer>
+    </div>
+  -->
+  </body>
+</html>
